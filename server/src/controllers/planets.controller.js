@@ -1,15 +1,17 @@
-const { planets } = require('../models/planets.model');
+const { getHabitablePlanets } = require('../models/planets.model');
 
-function getPlanets (req, res) {
+function httpGetPlanets (req, res) {
+    const planets = getHabitablePlanets();
     return res.status(200).json(planets);
 }
 
-function getPlanet (req, res) {
+function httpGetPlanet (req, res) {
     const planetId = Number(req.params.planetId);
 
     if (!planetId) {
         return res.status(400).json({ message: 'Expected parameter is missing.' });
     } else {
+        const planets = getHabitablePlanets();
         const planet = planets.find(planet => planet.id === planetId);
 
         if (planet) {
@@ -21,6 +23,6 @@ function getPlanet (req, res) {
 }
 
 module.exports = {
-    getPlanets,
-    getPlanet,
+    httpGetPlanets,
+    httpGetPlanet,
 };

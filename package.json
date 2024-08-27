@@ -6,10 +6,11 @@
     "install:client": "npm install --prefix client",
     "install:server": "npm install --prefix server",
     "install": "npm run install:server && npm run install:client",
-    "watch:client": "npm start --prefix client",
-    "watch:server": "npm run watch --prefix server",
-    "watch": "npm run watch:server & npm run watch:client",
-    "test": "npm run test --prefix server && npm run test --prefix client"
+    "client": "npm start --prefix client",
+    "server": "npm run watch --prefix server",
+    "watch": "npm run server & npm run client",
+    "deploy": "npm run build --prefix client && npm start --prefix server",
+    "test": "npm test --prefix server && npm test --prefix client"
   },
   "keywords": [],
   "author": "",
