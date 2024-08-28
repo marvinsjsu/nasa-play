@@ -2,6 +2,7 @@ const cors = require('cors');
 
 const CORS_WHITELIST = [
     'http://localhost:3000',
+    'http://localhost:3001',
 ];
 
 const corsOptions = {
