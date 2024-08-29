@@ -1,16 +1,16 @@
 const {
     existsLaunchWithFlightNumber,
     abortLaunchByFlightNumber,
+    scheduleNewLaunch,
     getAllLaunches,
-    addNewLaunch,
 } = require('../models/launches.model');
 
-function httpGetAllLaunches (req, res) {
-    const launches = getAllLaunches();
+async function httpGetAllLaunches (req, res) {
+    const launches = await getAllLaunches();
     return res.status(200).json(launches);
 }
 
-function httpAddNewLaunch (req, res) {
+async function httpAddNewLaunch (req, res) {
     const launch = req.body;
 
     if (!launch.mission || !launch.rocket || !launch.target || !launch.launchDate) {
@@ -33,21 +33,37 @@ function httpAddNewLaunch (req, res) {
         });
     }
 
-    addNewLaunch(launch);
-    return res.status(201).json(launch);
+    try {
+        await scheduleNewLaunch(launch);
+        return res.status(201).json(launch);        
+    } catch (err) {
+        console.error(`Unable to add launch: ${err}`);
+        res.status(500).json({
+            error: 'Unable to add launch.',
+        });
+    }
 }
 
-function httpAbortLaunch (req, res) {
+async function httpAbortLaunch (req, res) {
     const flightNumber = Number(req.params.flightNumber);
-
-    if (!existsLaunchWithFlightNumber(flightNumber)) {
+    const existsLaunch = await existsLaunchWithFlightNumber(flightNumber);
+    if (!existsLaunch) {
         return res.status(404).json({
             error: 'Launch not found.',
         });
     }
 
-    const launch = abortLaunchByFlightNumber(flightNumber);
-    return res.status(200).json(launch);
+    const abortedLaunch = await abortLaunchByFlightNumber(flightNumber);
+
+    if (!abortedLaunch) {
+        return res.status(400).json({
+            error: 'Unable to abort launch.',
+        });
+    }
+
+    return res.status(200).json({
+        message: 'Launch has been aborted.',
+    });
 }
 
 module.exports = {
