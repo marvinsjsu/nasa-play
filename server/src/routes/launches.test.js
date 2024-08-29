@@ -17,16 +17,16 @@ describe('Launches API Tests', () => {
         await disconnectMongoDB();
     });
 
-    describe('Test GET /launches', () => {
+    describe('Test GET /v1/launches', () => {
         test('It should respond with 200 success.', async () => {
             await request(app)
-                .get('/launches')
+                .get('/v1/launches')
                 .expect('Content-Type', /json/)
                 .expect(200);
         });
     });
     
-    describe('Test POST /launches', () => {
+    describe('Test POST /v1/launches', () => {
         const completeLaunchData = {
             mission: 'NOA Tester Mission',
             target: 'Kepler-1652 b',
@@ -67,7 +67,7 @@ describe('Launches API Tests', () => {
     
         test('It should respond with 201 created.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(completeLaunchData)
                 .expect('Content-Type', /json/)
                 .expect(201);
@@ -81,7 +81,7 @@ describe('Launches API Tests', () => {
     
         test('Request without launch date should respond with 400 missing launch property.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(launchDataWithoutDate)
                 .expect('Content-Type', /json/)
                 .expect(400);
@@ -93,7 +93,7 @@ describe('Launches API Tests', () => {
     
         test('Request without mission should respond with 400 missing launch property.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(launchDataWithoutMission)
                 .expect('Content-Type', /json/)
                 .expect(400);
@@ -105,7 +105,7 @@ describe('Launches API Tests', () => {
     
         test('Request without target should respond with 400 missing launch property.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(launchDataWithoutTarget)
                 .expect('Content-Type', /json/)
                 .expect(400);
@@ -117,7 +117,7 @@ describe('Launches API Tests', () => {
     
         test('Request without rocket should respond with 400 missing launch property.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(launchDataWithoutRocket)
                 .expect('Content-Type', /json/)
                 .expect(400);
@@ -129,7 +129,7 @@ describe('Launches API Tests', () => {
     
         test('Request with invalid launch date should respond with 400 invalid launch date.', async () => {
             const response = await request(app)
-                .post('/launches')
+                .post('/v1/launches')
                 .send(launchDataWithInvalidLaunchDate)
                 .expect('Content-Type', /json/)
                 .expect(400);
