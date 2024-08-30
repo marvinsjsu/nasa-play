@@ -5,8 +5,11 @@ const {
     getAllLaunches,
 } = require('../models/launches.model');
 
+const { getPagination } = require('../services/queries.service');
+
 async function httpGetAllLaunches (req, res) {
-    const launches = await getAllLaunches();
+    const { skip, limit, sort} = getPagination(req.query);
+    const launches = await getAllLaunches(skip, limit, sort);
     return res.status(200).json(launches);
 }
 
