@@ -1,6 +1,7 @@
 const path = require('path');
 
 const express = require('express');
+const helmet = require('helmet');
 
 const corsMiddleware = require('./middlewares/cors.middleware');
 const logsMiddleware = require('./middlewares/logs.middleware');
@@ -13,6 +14,7 @@ const app = express();
 const ABS_PATH_PUBLIC = path.join(__dirname, '..', 'public');
 
 // set middlewares
+app.use(helmet());
 app.use(corsMiddleware);
 app.use(logsMiddleware);
 
