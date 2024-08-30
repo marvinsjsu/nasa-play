@@ -51,6 +51,7 @@ The project is organized as follows:
 ├── notes/              # Summaries of concepts and tools
 ├── package.json        # Has scripts to build and run both client and server
 └── README.md           # This README file
+```
 
 ### How to start the project
 
