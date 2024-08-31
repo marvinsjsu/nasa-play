@@ -20,7 +20,8 @@ A project to deep-dive into Node.js and its ecosystem.
 
 Welcome to the **nasa-play**! This repository is dedicated to my journey of learning Node.js and the many concepts and tools used for back-end development. The aim of this project is to document, practice, and share knowledge as I explore new concepts, technologies, and skills.
 
-Whether you’re a beginner looking to understand the basics or an experienced developer wanting to deepen your understanding, this project is designed to provide useful resources for how one would build their Node app.
+Whether you’re a beginner looking to understand the basics or an experienced developer wanting to deepen your understanding, this project is designed to provide useful resources for how one would build their Node app.  Note that details of the `client` app is
+not a priority at this time - it's to simply serve as an example of API interactions.
 
 ## Goals
 
@@ -46,7 +47,7 @@ The project is organized as follows:
 
 ```plaintext
 .
-├── client/             # React Single-Page Application
+├── client/             # Single-Page Application built with React
 ├── server/             # Express API
 ├── notes/              # Summaries of concepts and tools
 ├── package.json        # Has scripts to build and run both client and server
