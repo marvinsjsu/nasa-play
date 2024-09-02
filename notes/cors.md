@@ -14,7 +14,7 @@ The `same-origin` policy is used by the browser to determine if it should allow 
 
 ### CORS Header
 
-The server must explicitly state a whitelist of origins that it will allow requests to via the `CORS Header`.
+The server must explicitly state a whitelist of origins that it will tell the browser to allow requests to be sent to another origin via the `CORS Header`.
 
 ```
 // this tells our browser to let scripts from https://www.google.com:8080 make GET requests to this server
