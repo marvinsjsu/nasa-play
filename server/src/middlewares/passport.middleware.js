@@ -12,6 +12,19 @@ function verifyCallback (accessToken, refreshToken, profile, done) {
     done(null, profile);
 }
 
+// Save the session to the cookie
+function serializeUserCallback (user, done) {
+    done(null, user.id);
+}
+
+// Read the session from the cookie
+// This is where we can do database lookups
+function deserializeUserCallback(userId, done) {
+    done(null, userId);
+}
+
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback));
+passport.serializeUser(serializeUserCallback);
+passport.deserializeUser(deserializeUserCallback);
 
 module.exports = passport;
